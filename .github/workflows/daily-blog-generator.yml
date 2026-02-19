@@ -43,7 +43,7 @@ jobs:
       - name: Run blog generator
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || 'gpt-4' }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || 'gpt-4o' }}
           TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
           REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
           REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
