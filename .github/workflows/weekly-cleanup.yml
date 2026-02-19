@@ -1,0 +1,51 @@
+name: Weekly Cleanup
+
+on:
+  schedule:
+    - cron: '0 7 * * 1'  # Monday 7 AM UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Clean old drafts (older than 7 days)
+        run: |
+          echo "=== Cleaning old drafts ==="
+          find drafts/ -name "*.md" -not -name ".gitkeep" -mtime +7 -print -delete || true
+          find drafts/ -name "*.json" -not -name ".gitkeep" -mtime +7 -print -delete || true
+          find drafts/ -name "*.txt" -mtime +7 -print -delete || true
+          echo "Done"
+
+      - name: Clean old logs (older than 14 days)
+        run: |
+          echo "=== Cleaning old logs ==="
+          find logs/ -name "*.log" -mtime +14 -print -delete || true
+          echo "Done"
+
+      - name: Commit cleanup
+        run: |
+          git config --local user.name "AI Blog Bot"
+          git config --local user.email "bot@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "[AUTO] Weekly cleanup - $(date +'%Y-%m-%d')"
+          git push origin main || true
+
+      - name: Notify cleanup complete
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              -H "Content-Type: application/json" \
+              -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"🧹 Weekly cleanup complete. Old drafts and logs removed.\"}"
+          fi

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News Blog - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h1>AI News Blog</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Dashboard</a>
+            <a href="archive.html">Archive</a>
+            <a href="settings.html">Settings</a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+            <span id="theme-icon">&#9790;</span>
+        </button>
+    </nav>
+
+    <main class="container">
+        <!-- Pipeline Health -->
+        <section class="card health-card">
+            <h2>Pipeline Health</h2>
+            <div class="health-grid">
+                <div class="stat">
+                    <span class="stat-value" id="total-posts">-</span>
+                    <span class="stat-label">Total Posts</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="avg-seo">-</span>
+                    <span class="stat-label">Avg SEO Score</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="avg-words">-</span>
+                    <span class="stat-label">Avg Words</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="last-generated">-</span>
+                    <span class="stat-label">Last Generated</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="card">
+            <h2>Quick Actions</h2>
+            <div class="actions-grid">
+                <button class="btn btn-primary" onclick="triggerGeneration()">
+                    Generate New Post
+                </button>
+                <div class="switch-topic">
+                    <select id="topic-select">
+                        <option value="1">Backup Topic 1</option>
+                        <option value="2">Backup Topic 2</option>
+                        <option value="3">Backup Topic 3</option>
+                        <option value="4">Backup Topic 4</option>
+                    </select>
+                    <button class="btn btn-secondary" onclick="switchTopic()">
+                        Switch Topic
+                    </button>
+                </div>
+                <button class="btn btn-outline" onclick="triggerCleanup()">
+                    Run Cleanup
+                </button>
+                <button class="btn btn-outline" onclick="triggerDryRun()">
+                    Dry Run
+                </button>
+            </div>
+            <p class="actions-note" id="actions-status"></p>
+        </section>
+
+        <!-- Today's Draft -->
+        <section class="card" id="today-card">
+            <h2>Latest Draft</h2>
+            <div id="today-draft">
+                <p class="muted">Loading...</p>
+            </div>
+        </section>
+
+        <!-- Recent Posts -->
+        <section class="card">
+            <h2>Recent Posts</h2>
+            <div class="posts-grid" id="recent-posts">
+                <p class="muted">Loading...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>AI News Blog Automation &mdash; <a href="https://github.com/Abivarma/blog-automation" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="js/actions.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

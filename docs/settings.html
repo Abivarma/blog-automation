@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News Blog - Settings</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h1>AI News Blog</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="archive.html">Archive</a>
+            <a href="settings.html" class="active">Settings</a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+            <span id="theme-icon">&#9790;</span>
+        </button>
+    </nav>
+
+    <main class="container">
+        <!-- GitHub Token Setup -->
+        <section class="card">
+            <h2>GitHub Token</h2>
+            <p class="description">A GitHub Personal Access Token (PAT) is required to trigger workflows and update settings from this dashboard. The token is stored in your browser only (localStorage) and never sent to any server.</p>
+            <div class="token-setup">
+                <input type="password" id="gh-token" class="input" placeholder="ghp_..." value="">
+                <button class="btn btn-primary" onclick="saveToken()">Save Token</button>
+                <button class="btn btn-outline" onclick="clearToken()">Clear</button>
+            </div>
+            <p class="token-status" id="token-status"></p>
+            <p class="description">Required scopes: <code>repo</code>, <code>workflow</code></p>
+        </section>
+
+        <!-- Schedule -->
+        <section class="card">
+            <h2>Generation Schedule</h2>
+            <p class="description">Current cron schedule for daily blog generation. Changes are committed to the workflow YAML file via GitHub API.</p>
+            <div class="schedule-setup">
+                <div class="schedule-current">
+                    <span class="meta-label">Current:</span>
+                    <code id="current-schedule">Loading...</code>
+                </div>
+                <div class="schedule-input">
+                    <label for="cron-input">New cron expression:</label>
+                    <input type="text" id="cron-input" class="input" placeholder="0 6 * * *">
+                    <button class="btn btn-secondary" onclick="updateSchedule()">Update Schedule</button>
+                </div>
+                <div class="cron-presets">
+                    <span class="meta-label">Presets:</span>
+                    <button class="btn btn-sm" onclick="setCron('0 6 * * *')">6 AM UTC</button>
+                    <button class="btn btn-sm" onclick="setCron('0 8 * * *')">8 AM UTC</button>
+                    <button class="btn btn-sm" onclick="setCron('0 12 * * *')">12 PM UTC</button>
+                    <button class="btn btn-sm" onclick="setCron('0 6 * * 1-5')">Weekdays 6 AM</button>
+                </div>
+            </div>
+            <p id="schedule-status"></p>
+        </section>
+
+        <!-- News Sources -->
+        <section class="card">
+            <h2>News Sources</h2>
+            <p class="description">Toggle which news sources are used for topic discovery. Changes are committed to <code>config/sources.json</code> via GitHub API.</p>
+            <div class="sources-grid" id="sources-grid">
+                <p class="muted">Loading...</p>
+            </div>
+            <button class="btn btn-secondary" onclick="saveSources()" id="save-sources-btn" style="display:none;">
+                Save Source Changes
+            </button>
+            <p id="sources-status"></p>
+        </section>
+
+        <!-- Manual Actions -->
+        <section class="card">
+            <h2>Manual Actions</h2>
+            <div class="actions-grid">
+                <button class="btn btn-primary" onclick="triggerGeneration()">
+                    Generate Post Now
+                </button>
+                <button class="btn btn-secondary" onclick="triggerDryRun()">
+                    Dry Run (No GPT-4)
+                </button>
+                <button class="btn btn-outline" onclick="triggerCleanup()">
+                    Run Weekly Cleanup
+                </button>
+            </div>
+            <p id="actions-status"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>AI News Blog Automation &mdash; <a href="https://github.com/Abivarma/blog-automation" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="js/actions.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Load config
+        async function loadSettings() {
+            // Show current token status
+            updateTokenStatus();
+
+            // Load config
+            try {
+                const resp = await fetch('data/config.json');
+                const config = await resp.json();
+
+                // Schedule
+                document.getElementById('current-schedule').textContent = config.schedule || '0 6 * * *';
+                document.getElementById('cron-input').placeholder = config.schedule || '0 6 * * *';
+
+                // Sources
+                const grid = document.getElementById('sources-grid');
+                const sources = config.sources || {};
+                if (Object.keys(sources).length === 0) {
+                    grid.innerHTML = '<p class="muted">No source configuration found.</p>';
+                    return;
+                }
+
+                grid.innerHTML = Object.entries(sources).map(([name, src]) => `
+                    <label class="source-toggle">
+                        <input type="checkbox" data-source="${name}" ${src.enabled ? 'checked' : ''}>
+                        <span class="source-name">${name}</span>
+                    </label>
+                `).join('');
+
+                document.getElementById('save-sources-btn').style.display = 'block';
+            } catch (e) {
+                console.warn('Could not load config:', e);
+            }
+        }
+
+        function saveToken() {
+            const token = document.getElementById('gh-token').value.trim();
+            if (token) {
+                localStorage.setItem('gh_pat', token);
+                document.getElementById('gh-token').value = '';
+                updateTokenStatus();
+            }
+        }
+
+        function clearToken() {
+            localStorage.removeItem('gh_pat');
+            updateTokenStatus();
+        }
+
+        function updateTokenStatus() {
+            const status = document.getElementById('token-status');
+            const token = localStorage.getItem('gh_pat');
+            if (token) {
+                status.textContent = 'Token saved (stored in browser localStorage)';
+                status.className = 'token-status success';
+            } else {
+                status.textContent = 'No token configured';
+                status.className = 'token-status warning';
+            }
+        }
+
+        function setCron(cron) {
+            document.getElementById('cron-input').value = cron;
+        }
+
+        async function updateSchedule() {
+            const newCron = document.getElementById('cron-input').value.trim();
+            if (!newCron) return;
+
+            const status = document.getElementById('schedule-status');
+            status.textContent = 'Updating schedule...';
+
+            const success = await updateWorkflowSchedule(newCron);
+            if (success) {
+                status.textContent = 'Schedule updated! New cron: ' + newCron;
+                status.className = 'success';
+                document.getElementById('current-schedule').textContent = newCron;
+            } else {
+                status.textContent = 'Failed to update schedule. Check your GitHub token.';
+                status.className = 'error';
+            }
+        }
+
+        async function saveSources() {
+            const status = document.getElementById('sources-status');
+            status.textContent = 'Saving source changes...';
+
+            const checkboxes = document.querySelectorAll('[data-source]');
+            const changes = {};
+            checkboxes.forEach(cb => {
+                changes[cb.dataset.source] = cb.checked;
+            });
+
+            const success = await updateSourceConfig(changes);
+            if (success) {
+                status.textContent = 'Source configuration updated!';
+                status.className = 'success';
+            } else {
+                status.textContent = 'Failed to update sources. Check your GitHub token.';
+                status.className = 'error';
+            }
+        }
+
+        loadSettings();
+    </script>
+</body>
+</html>

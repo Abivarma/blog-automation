@@ -1,0 +1,93 @@
+name: Daily AI Blog Generator
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # Every day at 6 AM UTC
+  workflow_dispatch:
+    inputs:
+      topic_index:
+        description: 'Switch to backup topic (1-4)'
+        required: false
+        type: number
+      dry_run:
+        description: 'Dry run (skip GPT-4 + git)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run blog generator
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL || 'gpt-4' }}
+          TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USER_AGENT: "AINewsBlogBot/1.0"
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.topic_index }}" != "" ]; then
+            ARGS="$ARGS --topic-index ${{ github.event.inputs.topic_index }}"
+          fi
+          if [ "${{ github.event.inputs.dry_run }}" == "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          uv run python scripts/main.py $ARGS
+
+      - name: Commit and push changes
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config --local user.name "AI Blog Bot"
+          git config --local user.email "bot@users.noreply.github.com"
+          git add drafts/ logs/ docs/data/
+          git diff --cached --quiet || git commit -m "[AUTO] Daily blog generated - $(date +'%Y-%m-%d %H:%M UTC')"
+          git pull --rebase origin main || true
+          git push origin main
+
+      - name: Upload logs as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: generation-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
+
+      - name: Notify on failure
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              -H "Content-Type: application/json" \
+              -d "{\"chat_id\": \"${TELEGRAM_CHAT_ID}\", \"text\": \"❌ Blog generation failed. Check GitHub Actions logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}"
+          fi

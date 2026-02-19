@@ -1,0 +1,42 @@
+{
+  "twitter": {
+    "enabled": true,
+    "hashtags": ["#AI", "#MachineLearning", "#GPT", "#LLM", "#DeepLearning", "#GenerativeAI", "#ArtificialIntelligence"],
+    "max_results": 50,
+    "lookback_hours": 24
+  },
+  "hackernews": {
+    "enabled": true,
+    "base_url": "https://hacker-news.firebaseio.com/v0",
+    "max_stories": 30,
+    "ai_keywords": [
+      "AI", "GPT", "LLM", "machine learning", "neural", "deep learning",
+      "transformer", "diffusion", "openai", "anthropic", "google deepmind",
+      "claude", "gemini", "llama", "mistral", "foundation model",
+      "artificial intelligence", "generative", "fine-tuning", "RAG",
+      "computer vision", "NLP", "reinforcement learning", "AGI"
+    ]
+  },
+  "reddit": {
+    "enabled": true,
+    "subreddits": ["MachineLearning", "ArtificialIntelligence", "programming", "LocalLLaMA"],
+    "time_filter": "day",
+    "limit": 25
+  },
+  "arxiv": {
+    "enabled": true,
+    "categories": ["cs.AI", "cs.LG", "cs.CL", "cs.SE"],
+    "max_results": 20,
+    "base_url": "http://export.arxiv.org/api/query"
+  },
+  "googlenews": {
+    "enabled": true,
+    "base_url": "https://newsapi.org/v2",
+    "queries": [
+      "artificial intelligence",
+      "machine learning",
+      "LLM large language model"
+    ],
+    "page_size": 20
+  }
+}

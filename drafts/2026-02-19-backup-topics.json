@@ -1,0 +1,72 @@
+{
+  "date": "2026-02-19",
+  "primary": {
+    "title": "Gemini 3.1 Pro",
+    "url": "https://deepmind.google/models/model-cards/gemini-3-1-pro/",
+    "source": "hackernews",
+    "summary": "Gemini 3.1 Pro",
+    "engagement_score": 0.7174,
+    "published_at": "2026-02-19T16:14:07+00:00",
+    "keywords": [],
+    "raw_data": {
+      "hn_id": 47075318,
+      "comments": 266
+    }
+  },
+  "backups": [
+    {
+      "title": "Measuring Mid-2025 LLM-Assistance on Novice Performance in Biology",
+      "url": "https://arxiv.org/abs/2602.16703v1",
+      "source": "arxiv",
+      "summary": "Large language models (LLMs) perform strongly on biological benchmarks, raising concerns that they may help novice actors acquire dual-use laboratory skills. Yet, whether this translates to improved human performance in the physical laboratory remains unclear. To address this, we conducted a pre-registered, investigator-blinded, randomized controlled trial (June-August 2025; n = 153) evaluating whether LLMs improve novice performance in tasks that collectively model a viral reverse genetics work",
+      "engagement_score": 0.5933,
+      "published_at": "2026-02-18T18:51:28Z",
+      "keywords": [
+        "cs.CY",
+        "cs.AI"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "Causality is Key for Interpretability Claims to Generalise",
+      "url": "https://arxiv.org/abs/2602.16698v1",
+      "source": "arxiv",
+      "summary": "Interpretability research on large language models (LLMs) has yielded important insights into model behaviour, yet recurring pitfalls persist: findings that do not generalise, and causal interpretations that outrun the evidence. Our position is that causal inference specifies what constitutes a valid mapping from model activations to invariant high-level structures, the data or assumptions needed to achieve it, and the inferences it can support. Specifically, Pearl's causal hierarchy clarifies w",
+      "engagement_score": 0.5929,
+      "published_at": "2026-02-18T18:45:04Z",
+      "keywords": [
+        "cs.LG"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "Parameter-free representations outperform single-cell foundation models on downstream benchmarks",
+      "url": "https://arxiv.org/abs/2602.16696v1",
+      "source": "arxiv",
+      "summary": "Single-cell RNA sequencing (scRNA-seq) data exhibit strong and reproducible statistical structure. This has motivated the development of large-scale foundation models, such as TranscriptFormer, that use transformer-based architectures to learn a generative model for gene expression by embedding genes into a latent vector space. These embeddings have been used to obtain state-of-the-art (SOTA) performance on downstream tasks such as cell-type classification, disease-state prediction, and cross-sp",
+      "engagement_score": 0.5927,
+      "published_at": "2026-02-18T18:42:29Z",
+      "keywords": [
+        "q-bio.GN",
+        "cs.LG",
+        "q-bio.QM"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "SPARC: Scenario Planning and Reasoning for Automated C Unit Test Generation",
+      "url": "https://arxiv.org/abs/2602.16671v1",
+      "source": "arxiv",
+      "summary": "Automated unit test generation for C remains a formidable challenge due to the semantic gap between high-level program intent and the rigid syntactic constraints of pointer arithmetic and manual memory management. While Large Language Models (LLMs) exhibit strong generative capabilities, direct intent-to-code synthesis frequently suffers from the leap-to-code failure mode, where models prematurely emit code without grounding in program structure, constraints, and semantics. This will result in n",
+      "engagement_score": 0.5904,
+      "published_at": "2026-02-18T18:09:03Z",
+      "keywords": [
+        "cs.SE",
+        "cs.AI"
+      ],
+      "raw_data": {}
+    }
+  ],
+  "total_fetched": 28,
+  "timestamp": "2026-02-19T18:39:41.208184+00:00"
+}

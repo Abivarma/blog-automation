@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI News Blog - Post</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked@15/marked.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h1>AI News Blog</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Dashboard</a>
+            <a href="archive.html">Archive</a>
+            <a href="settings.html">Settings</a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+            <span id="theme-icon">&#9790;</span>
+        </button>
+    </nav>
+
+    <main class="container post-layout">
+        <!-- Sidebar -->
+        <aside class="post-sidebar card" id="post-meta">
+            <h3>Post Details</h3>
+            <div class="meta-list">
+                <p class="muted">Loading...</p>
+            </div>
+        </aside>
+
+        <!-- Content -->
+        <article class="card post-content" id="post-content">
+            <p class="muted">Loading post...</p>
+        </article>
+    </main>
+
+    <!-- Copy button (fixed) -->
+    <button class="copy-btn" id="copy-btn" onclick="copyToClipboard()" title="Copy markdown to clipboard">
+        Copy MD
+    </button>
+
+    <footer>
+        <p>AI News Blog Automation &mdash; <a href="https://github.com/Abivarma/blog-automation" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        let rawMarkdown = '';
+
+        async function loadPost() {
+            const params = new URLSearchParams(window.location.search);
+            const filename = params.get('file');
+
+            if (!filename) {
+                document.getElementById('post-content').innerHTML = '<p class="muted">No post specified.</p>';
+                return;
+            }
+
+            // Load metadata
+            try {
+                const postsResp = await fetch('data/posts.json');
+                const posts = await postsResp.json();
+                const meta = posts.find(p => p.filename === filename);
+
+                if (meta) {
+                    document.title = `${meta.title} - AI News Blog`;
+                    document.getElementById('post-meta').innerHTML = `
+                        <h3>Post Details</h3>
+                        <div class="meta-list">
+                            <div class="meta-item">
+                                <span class="meta-label">Date</span>
+                                <span class="meta-value">${meta.date}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Words</span>
+                                <span class="meta-value">${meta.word_count.toLocaleString()}</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">SEO Score</span>
+                                <span class="meta-value">
+                                    <span class="seo-badge ${seoClass(meta.seo_score)}">${meta.seo_score}/100</span>
+                                </span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status</span>
+                                <span class="meta-value">
+                                    <span class="status-badge status-${meta.status}">${meta.status}</span>
+                                </span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Keywords</span>
+                                <span class="meta-value">${(meta.keywords || []).map(k => `<span class="tag">${escapeHtml(k)}</span>`).join(' ')}</span>
+                            </div>
+                            ${meta.meta_description ? `
+                            <div class="meta-item">
+                                <span class="meta-label">Meta Desc</span>
+                                <span class="meta-value meta-desc">${escapeHtml(meta.meta_description)}</span>
+                            </div>` : ''}
+                        </div>
+                    `;
+                }
+            } catch (e) {
+                console.warn('Could not load post metadata:', e);
+            }
+
+            // Load markdown content
+            try {
+                const resp = await fetch(`data/posts/${filename}`);
+                rawMarkdown = await resp.text();
+                const html = marked.parse(rawMarkdown);
+                document.getElementById('post-content').innerHTML = html;
+            } catch (e) {
+                document.getElementById('post-content').innerHTML =
+                    '<p class="muted">Could not load post content.</p>';
+            }
+        }
+
+        async function copyToClipboard() {
+            try {
+                await navigator.clipboard.writeText(rawMarkdown);
+                const btn = document.getElementById('copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => { btn.textContent = 'Copy MD'; }, 2000);
+            } catch (e) {
+                alert('Failed to copy. Try selecting the text manually.');
+            }
+        }
+
+        loadPost();
+    </script>
+</body>
+</html>

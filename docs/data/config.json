@@ -1,0 +1,21 @@
+{
+  "schedule": "0 6 * * *",
+  "sources": {
+    "twitter": {
+      "enabled": true
+    },
+    "hackernews": {
+      "enabled": true
+    },
+    "reddit": {
+      "enabled": true
+    },
+    "arxiv": {
+      "enabled": true
+    },
+    "googlenews": {
+      "enabled": true
+    }
+  },
+  "repo": "Abivarma/blog-automation"
+}

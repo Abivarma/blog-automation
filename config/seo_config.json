@@ -1,0 +1,39 @@
+{
+  "target_word_count": {
+    "min": 3500,
+    "max": 4500
+  },
+  "keyword_density": {
+    "min": 0.5,
+    "max": 2.5
+  },
+  "readability": {
+    "flesch_reading_ease_min": 55,
+    "flesch_reading_ease_max": 70,
+    "flesch_kincaid_grade_min": 8,
+    "flesch_kincaid_grade_max": 10
+  },
+  "title": {
+    "min_length": 50,
+    "max_length": 65
+  },
+  "meta_description": {
+    "min_length": 150,
+    "max_length": 160
+  },
+  "structure": {
+    "min_h2_headings": 6,
+    "min_h3_headings": 4,
+    "min_paragraphs": 20,
+    "max_paragraph_words": 150,
+    "min_list_items": 5
+  },
+  "scoring_weights": {
+    "word_count": 0.20,
+    "readability": 0.20,
+    "keyword_density": 0.15,
+    "structure": 0.20,
+    "meta_quality": 0.10,
+    "content_depth": 0.15
+  }
+}
