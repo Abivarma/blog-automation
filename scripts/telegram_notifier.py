@@ -1,6 +1,6 @@
 """
 Telegram Notifier - Sends formatted blog draft notifications.
-Uses raw requests (no python-telegram-bot dependency needed).
+Uses raw requests with HTML parse mode (more reliable than MarkdownV2).
 """
 
 import os
@@ -17,7 +17,8 @@ class TelegramNotifier:
 
     def __init__(self):
         self.bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
-        self.chat_id = os.getenv("TELEGRAM_CHAT_ID")
+        chat_id_str = os.getenv("TELEGRAM_CHAT_ID", "")
+        self.chat_id = int(chat_id_str) if chat_id_str.strip() else None
 
     @property
     def _base_url(self) -> str:
@@ -42,17 +43,14 @@ class TelegramNotifier:
             logger.warning("Telegram credentials not set, skipping error notification")
             return False
 
-        text = (
-            "🚨 *Blog Generator Error*\n\n"
-            f"`{error_msg[:500]}`\n\n"
-            "Check GitHub Actions logs for details."
-        )
-        return self._send_message(text)
+        # Keep error messages plain text to avoid formatting issues
+        text = f"🚨 Blog Generator Error\n\n{error_msg[:500]}\n\nCheck GitHub Actions logs for details."
+        return self._send_message(text, use_html=False)
 
     def _format_message(self, draft: Dict, topics: Dict) -> str:
-        """Format the Telegram notification message."""
+        """Format the Telegram notification message using HTML."""
         meta = draft.get("metadata", {})
-        title = meta.get("title", "Untitled")
+        title = self._escape_html(meta.get("title", "Untitled"))
         word_count = meta.get("word_count", 0)
         seo_score = meta.get("seo_score", 0)
         keywords = ", ".join(meta.get("keywords", [])[:5])
@@ -73,89 +71,65 @@ class TelegramNotifier:
         backups = topics.get("backups", [])
         backup_text = ""
         for i, b in enumerate(backups[:4], 2):
-            backup_text += f"\n  {i}️⃣ {b.title[:60]}"
+            backup_text += f"\n  {i}. {self._escape_html(b.title[:60])}"
 
         # Reading time estimate
         reading_time = max(1, word_count // 200)
 
         message = (
-            f"📰 *AI News Daily Blog \\- Ready for Review*\n\n"
-            f"📅 *Date:* {date}\n\n"
-            f"🎯 *Title:*\n{self._escape_md(title)}\n\n"
-            f"📊 *Stats:*\n"
+            f"📰 <b>AI News Daily Blog - Ready for Review</b>\n\n"
+            f"📅 <b>Date:</b> {date}\n\n"
+            f"🎯 <b>Title:</b>\n{title}\n\n"
+            f"📊 <b>Stats:</b>\n"
             f"  • Words: {word_count:,}\n"
             f"  • Reading time: ~{reading_time} min\n"
             f"  • SEO Score: {seo_score}/100\n"
-            f"  • Keywords: {self._escape_md(keywords)}\n"
+            f"  • Keywords: {self._escape_html(keywords)}\n"
             f"  • Cost: ${cost:.4f}\n\n"
-            f"🖼️ *Image:* {image_status}\n\n"
+            f"🖼️ <b>Image:</b> {image_status}\n\n"
         )
 
         if backup_text:
-            message += f"📝 *Backup Topics:*{backup_text}\n\n"
+            message += f"📝 <b>Backup Topics:</b>{backup_text}\n\n"
 
         message += (
-            "💡 *Actions:*\n"
-            "To switch topic, trigger workflow\\_dispatch\n"
-            "with `topic\\_index` input \\(2\\-5\\) in GitHub Actions\\.\n\n"
-            "✅ Review the draft in the repo's `drafts/` folder\\."
+            "💡 <b>Actions:</b>\n"
+            "To switch topic, trigger workflow_dispatch\n"
+            "with topic_index input (2-5) in GitHub Actions.\n\n"
+            "✅ Review the draft in the repo's drafts/ folder."
         )
 
         return message
 
-    def _escape_md(self, text: str) -> str:
-        """Escape special characters for Telegram MarkdownV2."""
-        special_chars = r"_*[]()~`>#+-=|{}.!"
-        escaped = ""
-        for char in text:
-            if char in special_chars:
-                escaped += f"\\{char}"
-            else:
-                escaped += char
-        return escaped
+    def _escape_html(self, text: str) -> str:
+        """Escape HTML special characters for Telegram."""
+        return (
+            text.replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+        )
 
-    def _send_message(self, text: str) -> bool:
+    def _send_message(self, text: str, use_html: bool = True) -> bool:
         """Send a message via Telegram Bot API."""
+        payload = {
+            "chat_id": self.chat_id,
+            "text": text,
+        }
+        if use_html:
+            payload["parse_mode"] = "HTML"
+
         try:
             resp = requests.post(
                 f"{self._base_url}/sendMessage",
-                json={
-                    "chat_id": self.chat_id,
-                    "text": text,
-                    "parse_mode": "MarkdownV2",
-                },
+                json=payload,
                 timeout=10,
             )
             resp.raise_for_status()
             logger.info("Telegram notification sent successfully")
             return True
-        except requests.exceptions.HTTPError as e:
-            # If MarkdownV2 fails, try plain text
-            logger.warning(f"MarkdownV2 failed ({e}), trying plain text")
-            return self._send_plain_text(text)
         except Exception as e:
             logger.error(f"Telegram notification failed: {e}")
-            return False
-
-    def _send_plain_text(self, text: str) -> bool:
-        """Fallback: send as plain text without formatting."""
-        import re
-        # Strip markdown formatting
-        plain = re.sub(r"\\(.)", r"\1", text)
-        plain = re.sub(r"[*_`]", "", plain)
-
-        try:
-            resp = requests.post(
-                f"{self._base_url}/sendMessage",
-                json={
-                    "chat_id": self.chat_id,
-                    "text": plain,
-                },
-                timeout=10,
-            )
-            resp.raise_for_status()
-            logger.info("Telegram plain text notification sent")
-            return True
-        except Exception as e:
-            logger.error(f"Telegram plain text also failed: {e}")
+            # Last resort: try plain text
+            if use_html:
+                return self._send_message(text, use_html=False)
             return False

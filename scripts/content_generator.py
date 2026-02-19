@@ -23,7 +23,7 @@ class ContentGenerator:
         config_path = Path(config_dir) if config_dir else CONFIG_DIR
 
         self.client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-        self.model = os.getenv("OPENAI_MODEL", "gpt-4")
+        self.model = os.getenv("OPENAI_MODEL", "gpt-4o")
 
         with open(config_path / "prompts.json") as f:
             self.prompts = json.load(f)
@@ -61,7 +61,7 @@ class ContentGenerator:
         min_words = self.seo_config["target_word_count"]["min"]
         if word_count < min_words:
             logger.info(f"Word count {word_count} < {min_words}, expanding...")
-            blog_content = self._expand_content(blog_content, min_words - word_count)
+            blog_content = self._expand_content(blog_content, min_words)
 
         # Step 5: Generate meta description
         logger.info("Step 4: Generating meta description...")
@@ -145,20 +145,39 @@ class ContentGenerator:
             .replace("{source_summaries}", source_summaries)
         )
 
-        return self._call_openai(prompt, max_tokens=8000, temperature=0.7)
+        return self._call_openai(prompt, max_tokens=16000, temperature=0.7)
 
-    def _expand_content(self, content: str, words_needed: int) -> str:
-        """Expand content if it falls below minimum word count."""
-        prompt = (
-            f"The following blog post needs to be expanded by approximately {words_needed} words. "
-            f"Add more depth to the Technical Deep Dive and Practical Applications sections. "
-            f"Add more real-world examples, code snippets, or detailed explanations. "
-            f"Return the COMPLETE expanded blog post in Markdown format.\n\n"
-            f"---\n{content}\n---"
-        )
-        expanded = self._call_openai(prompt, max_tokens=8000, temperature=0.7)
-        if len(expanded.split()) > len(content.split()):
-            return expanded
+    def _expand_content(self, content: str, target_words: int) -> str:
+        """Expand content iteratively until target word count is reached."""
+        max_attempts = 3
+        for attempt in range(1, max_attempts + 1):
+            current_words = len(content.split())
+            words_needed = target_words - current_words
+            if words_needed <= 0:
+                break
+
+            logger.info(f"Expansion attempt {attempt}/{max_attempts}: need {words_needed} more words")
+
+            prompt = (
+                f"You are expanding an existing blog post. The current version has {current_words} words "
+                f"but the target is {target_words} words minimum.\n\n"
+                f"CRITICAL: You MUST write at least {target_words} words total. This is non-negotiable.\n\n"
+                f"Expand the following sections significantly:\n"
+                f"- Technical Deep Dive: Add 2-3 more detailed subsections with code examples\n"
+                f"- Practical Applications: Add 3 detailed real-world use cases with specific examples\n"
+                f"- Background & Context: Add more historical context and industry evolution\n"
+                f"- Challenges: Add more specific technical limitations and edge cases\n\n"
+                f"Return the COMPLETE expanded blog post in Markdown format. "
+                f"Do NOT summarize or shorten any existing sections.\n\n"
+                f"---CURRENT POST---\n{content}\n---END POST---"
+            )
+            expanded = self._call_openai(prompt, max_tokens=16000, temperature=0.7)
+            if len(expanded.split()) > current_words:
+                content = expanded
+            else:
+                logger.warning(f"Expansion attempt {attempt} did not increase word count")
+                break
+
         return content
 
     def _generate_meta_description(self, title: str, topic_brief: Dict) -> str:
