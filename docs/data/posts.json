@@ -1,19 +1,36 @@
 [
   {
-    "filename": "2026-02-19-navigating-gemini-31-pro-5-key-interpretability-trends.md",
+    "filename": "2026-02-19-gemini-31-pro-unleashing-biologys-secrets-for-beginners.md",
     "date": "2026-02-19",
-    "title": "Navigating Gemini 3.1 Pro: 5 Key Interpretability Trends",
-    "slug": "navigating-gemini-31-pro-5-key-interpretability-trends",
-    "word_count": 3119,
-    "seo_score": 65,
+    "title": "Gemini 3.1 Pro: Unleashing Biology's Secrets for Beginners",
+    "slug": "gemini-31-pro-unleashing-biologys-secrets-for-beginners",
+    "word_count": 1666,
+    "seo_score": 62,
     "status": "draft",
     "keywords": [
       "Gemini 3.1 Pro",
-      "Large Language Models",
-      "AI in Biology",
-      "Interpretability",
-      "Causal Inference"
+      "LLM in biology",
+      "causal interpretability",
+      "novice learning",
+      "AI in laboratories"
     ],
-    "meta_description": "Explore 'Gemini 3.1 Pro' in our blog to uncover 5 key interpretability trends reshaping AI's impact on biology. Stay ahead in the evolving AI landscape!"
+    "meta_description": "Discover Gemini 3.1 Pro: Transforming biology education for beginners with causal interpretability. Unlock biology's secrets effortlessly with this revolutio..."
+  },
+  {
+    "filename": "2026-02-19-gemini-31-pro-top-7-breakthroughs-in-biological-research.md",
+    "date": "2026-02-19",
+    "title": "Gemini 3.1 Pro: Top 7 Breakthroughs in Biological Research",
+    "slug": "gemini-31-pro-top-7-breakthroughs-in-biological-research",
+    "word_count": 1813,
+    "seo_score": 60,
+    "status": "draft",
+    "keywords": [
+      "Gemini 3.1 Pro",
+      "large language models",
+      "biological research",
+      "LLM interpretability",
+      "novice laboratory performance"
+    ],
+    "meta_description": "Discover how Gemini 3.1 Pro is revolutionizing biological research! Explore the top 7 breakthroughs using advanced LLMs to accelerate discoveries and innovat..."
   }
 ]
