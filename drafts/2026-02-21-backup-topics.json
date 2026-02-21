@@ -1,0 +1,72 @@
+{
+  "date": "2026-02-21",
+  "primary": {
+    "title": "Ggml.ai joins Hugging Face to ensure the long-term progress of Local AI",
+    "url": "https://github.com/ggml-org/llama.cpp/discussions/19759",
+    "source": "hackernews",
+    "summary": "Ggml.ai joins Hugging Face to ensure the long-term progress of Local AI",
+    "engagement_score": 0.6731,
+    "published_at": "2026-02-20T13:51:04+00:00",
+    "keywords": [],
+    "raw_data": {
+      "hn_id": 47088037,
+      "comments": 166
+    }
+  },
+  "backups": [
+    {
+      "title": "The path to ubiquitous AI (17k tokens/sec)",
+      "url": "https://taalas.com/the-path-to-ubiquitous-ai/",
+      "source": "hackernews",
+      "summary": "The path to ubiquitous AI (17k tokens/sec)",
+      "engagement_score": 0.6599,
+      "published_at": "2026-02-20T10:32:52+00:00",
+      "keywords": [],
+      "raw_data": {
+        "hn_id": 47086181,
+        "comments": 388
+      }
+    },
+    {
+      "title": "Cord: Coordinating Trees of AI Agents",
+      "url": "https://www.june.kim/cord",
+      "source": "hackernews",
+      "summary": "Cord: Coordinating Trees of AI Agents",
+      "engagement_score": 0.3864,
+      "published_at": "2026-02-21T01:27:35+00:00",
+      "keywords": [],
+      "raw_data": {
+        "hn_id": 47096466,
+        "comments": 2
+      }
+    },
+    {
+      "title": "Every company building your AI assistant is now an ad company",
+      "url": "https://juno-labs.com/blogs/every-company-building-your-ai-assistant-is-an-ad-company",
+      "source": "hackernews",
+      "summary": "Every company building your AI assistant is now an ad company",
+      "engagement_score": 0.3556,
+      "published_at": "2026-02-20T18:55:15+00:00",
+      "keywords": [],
+      "raw_data": {
+        "hn_id": 47092203,
+        "comments": 44
+      }
+    },
+    {
+      "title": "Making frontier cybersecurity capabilities available to defenders",
+      "url": "https://www.anthropic.com/news/claude-code-security",
+      "source": "hackernews",
+      "summary": "Making frontier cybersecurity capabilities available to defenders",
+      "engagement_score": 0.3484,
+      "published_at": "2026-02-20T18:03:19+00:00",
+      "keywords": [],
+      "raw_data": {
+        "hn_id": 47091469,
+        "comments": 50
+      }
+    }
+  ],
+  "total_fetched": 7,
+  "timestamp": "2026-02-21T02:45:36.275902+00:00"
+}
