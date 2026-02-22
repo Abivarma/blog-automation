@@ -1,0 +1,71 @@
+{
+  "date": "2026-02-22",
+  "primary": {
+    "title": "Claws are now a new layer on top of LLM agents",
+    "url": "https://twitter.com/karpathy/status/2024987174077432126",
+    "source": "hackernews",
+    "summary": "Claws are now a new layer on top of LLM agents",
+    "engagement_score": 0.7175,
+    "published_at": "2026-02-21T00:56:29+00:00",
+    "keywords": [],
+    "raw_data": {
+      "hn_id": 47096253,
+      "comments": 658
+    }
+  },
+  "backups": [
+    {
+      "title": "How I use Claude Code: Separation of planning and execution",
+      "url": "https://boristane.com/blog/how-i-use-claude-code/",
+      "source": "hackernews",
+      "summary": "How I use Claude Code: Separation of planning and execution",
+      "engagement_score": 0.636,
+      "published_at": "2026-02-22T00:29:05+00:00",
+      "keywords": [],
+      "raw_data": {
+        "hn_id": 47106686,
+        "comments": 97
+      }
+    },
+    {
+      "title": "CXMT has been offering DDR4 chips at about half the prevailing market rate",
+      "url": "https://www.koreaherald.com/article/10679206",
+      "source": "hackernews",
+      "summary": "CXMT has been offering DDR4 chips at about half the prevailing market rate",
+      "engagement_score": 0.5945,
+      "published_at": "2026-02-21T14:32:16+00:00",
+      "keywords": [],
+      "raw_data": {
+        "hn_id": 47101171,
+        "comments": 145
+      }
+    },
+    {
+      "title": "Stable Asynchrony: Variance-Controlled Off-Policy RL for LLMs",
+      "url": "https://arxiv.org/abs/2602.17616v1",
+      "source": "arxiv",
+      "summary": "Reinforcement learning (RL) is widely used to improve large language models on reasoning tasks, and asynchronous RL training is attractive because it increases end-to-end throughput. However, for widely adopted critic-free policy-gradient methods such as REINFORCE and GRPO, high asynchrony makes the policy-gradient estimator markedly $\\textbf{higher variance}$: training on stale rollouts creates heavy-tailed importance ratios, causing a small fraction of samples to dominate updates. This amplifi",
+      "engagement_score": 0.5925,
+      "published_at": "2026-02-19T18:40:51Z",
+      "keywords": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "Unmasking the Factual-Conceptual Gap in Persian Language Models",
+      "url": "https://arxiv.org/abs/2602.17623v1",
+      "source": "arxiv",
+      "summary": "While emerging Persian NLP benchmarks have expanded into pragmatics and politeness, they rarely distinguish between memorized cultural facts and the ability to reason about implicit social norms. We introduce DivanBench, a diagnostic benchmark focused on superstitions and customs, arbitrary, context-dependent rules that resist simple logical deduction. Through 315 questions across three task types (factual retrieval, paired scenario verification, and situational reasoning), we evaluate seven Per",
+      "engagement_score": 0.5425,
+      "published_at": "2026-02-19T18:42:46Z",
+      "keywords": [
+        "cs.CL"
+      ],
+      "raw_data": {}
+    }
+  ],
+  "total_fetched": 31,
+  "timestamp": "2026-02-22T03:20:56.951315+00:00"
+}
