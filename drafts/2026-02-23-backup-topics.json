@@ -1,0 +1,71 @@
+{
+  "date": "2026-02-23",
+  "primary": {
+    "title": "Google restricting Google AI Pro/Ultra subscribers for using OpenClaw",
+    "url": "https://discuss.ai.google.dev/t/account-restricted-without-warning-google-ai-ultra-oauth-via-openclaw/122778",
+    "source": "hackernews",
+    "summary": "Google restricting Google AI Pro/Ultra subscribers for using OpenClaw",
+    "engagement_score": 0.7097,
+    "published_at": "2026-02-22T23:07:55+00:00",
+    "keywords": [],
+    "raw_data": {
+      "hn_id": 47115805,
+      "comments": 289
+    }
+  },
+  "backups": [
+    {
+      "title": "VIRAASAT: Traversing Novel Paths for Indian Cultural Reasoning",
+      "url": "https://arxiv.org/abs/2602.18429v1",
+      "source": "arxiv",
+      "summary": "Large Language Models (LLMs) have made significant progress in reasoning tasks across various domains such as mathematics and coding. However, their performance deteriorates in tasks requiring rich socio-cultural knowledge and diverse local contexts, particularly those involving Indian Culture. Existing Cultural benchmarks are (i) Manually crafted, (ii) contain single-hop questions testing factual recall, and (iii) prohibitively costly to scale, leaving this deficiency largely unmeasured. To add",
+      "engagement_score": 0.5425,
+      "published_at": "2026-02-20T18:53:07Z",
+      "keywords": [
+        "cs.CL",
+        "cs.IR"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "Latent Equivariant Operators for Robust Object Recognition: Promise and Challenges",
+      "url": "https://arxiv.org/abs/2602.18406v1",
+      "source": "arxiv",
+      "summary": "Despite the successes of deep learning in computer vision, difficulties persist in recognizing objects that have undergone group-symmetric transformations rarely seen during training-for example objects seen in unusual poses, scales, positions, or combinations thereof. Equivariant neural networks are a solution to the problem of generalizing across symmetric transformations, but require knowledge of transformations a priori. An alternative family of architectures proposes to earn equivariant ope",
+      "engagement_score": 0.5425,
+      "published_at": "2026-02-20T18:14:05Z",
+      "keywords": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "Man accidentally gains control of 7k robot vacuums",
+      "url": "https://www.popsci.com/technology/robot-vacuum-army/",
+      "source": "hackernews",
+      "summary": "Man accidentally gains control of 7k robot vacuums",
+      "engagement_score": 0.5247,
+      "published_at": "2026-02-22T14:44:42+00:00",
+      "keywords": [],
+      "raw_data": {
+        "hn_id": 47111400,
+        "comments": 125
+      }
+    },
+    {
+      "title": "SPQ: An Ensemble Technique for Large Language Model Compression",
+      "url": "https://arxiv.org/abs/2602.18420v1",
+      "source": "arxiv",
+      "summary": "This study presents an ensemble technique, SPQ (SVD-Pruning-Quantization), for large language model (LLM) compression that combines variance-retained singular value decomposition (SVD), activation-based pruning, and post-training linear quantization. Each component targets a different source of inefficiency: i) pruning removes redundant neurons in MLP layers, ii) SVD reduces attention projections into compact low-rank factors, iii) and 8-bit quantization uniformly compresses all linear layers. A",
+      "engagement_score": 0.4925,
+      "published_at": "2026-02-20T18:44:16Z",
+      "keywords": [
+        "cs.CL"
+      ],
+      "raw_data": {}
+    }
+  ],
+  "total_fetched": 29,
+  "timestamp": "2026-02-23T03:24:46.634633+00:00"
+}
