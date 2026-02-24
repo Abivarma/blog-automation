@@ -1,0 +1,74 @@
+{
+  "date": "2026-02-24",
+  "primary": {
+    "title": "To Reason or Not to: Selective Chain-of-Thought in Medical Question Answering",
+    "url": "https://arxiv.org/abs/2602.20130v1",
+    "source": "arxiv",
+    "summary": "Objective: To improve the efficiency of medical question answering (MedQA) with large language models (LLMs) by avoiding unnecessary reasoning while maintaining accuracy.   Methods: We propose Selective Chain-of-Thought (Selective CoT), an inference-time strategy that first predicts whether a question requires reasoning and generates a rationale only when needed. Two open-source LLMs (Llama-3.1-8B and Qwen-2.5-7B) were evaluated on four biomedical QA benchmarks-HeadQA, MedQA-USMLE, MedMCQA, and ",
+    "engagement_score": 0.7566,
+    "published_at": "2026-02-23T18:42:50Z",
+    "keywords": [
+      "cs.CL",
+      "cs.AI"
+    ],
+    "raw_data": {}
+  },
+  "backups": [
+    {
+      "title": "Benchmarking Unlearning for Vision Transformers",
+      "url": "https://arxiv.org/abs/2602.20114v1",
+      "source": "arxiv",
+      "summary": "Research in machine unlearning (MU) has gained strong momentum: MU is now widely regarded as a critical capability for building safe and fair AI. In parallel, research into transformer architectures for computer vision tasks has been highly successful: Increasingly, Vision Transformers (VTs) emerge as strong alternatives to CNNs. Yet, MU research for vision tasks has largely centered on CNNs, not VTs. While benchmarking MU efforts have addressed LLMs, diffusion models, and CNNs, none exist for V",
+      "engagement_score": 0.7559,
+      "published_at": "2026-02-23T18:33:16Z",
+      "keywords": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "NanoKnow: How to Know What Your Language Model Knows",
+      "url": "https://arxiv.org/abs/2602.20122v1",
+      "source": "arxiv",
+      "summary": "How do large language models (LLMs) know what they know? Answering this question has been difficult because pre-training data is often a \"black box\" -- unknown or inaccessible. The recent release of nanochat -- a family of small LLMs with fully open pre-training data -- addresses this as it provides a transparent view into where a model's parametric knowledge comes from. Towards the goal of understanding how knowledge is encoded by LLMs, we release NanoKnow, a benchmark dataset that partitions q",
+      "engagement_score": 0.7062,
+      "published_at": "2026-02-23T18:37:49Z",
+      "keywords": [
+        "cs.CL",
+        "cs.AI",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "ReSyn: Autonomously Scaling Synthetic Environments for Reasoning Models",
+      "url": "https://arxiv.org/abs/2602.20117v1",
+      "source": "arxiv",
+      "summary": "Reinforcement learning with verifiable rewards (RLVR) has emerged as a promising approach for training reasoning language models (RLMs) by leveraging supervision from verifiers. Although verifier implementation is easier than solution annotation for many tasks, existing synthetic data generation methods remain largely solution-centric, while verifier-based methods rely on a few hand-crafted procedural environments. In this work, we scale RLVR by introducing ReSyn, a pipeline that generates diver",
+      "engagement_score": 0.706,
+      "published_at": "2026-02-23T18:34:29Z",
+      "keywords": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "FreeBSD doesn't have Wi-Fi driver for my old MacBook. AI build one for me",
+      "url": "https://vladimir.varank.in/notes/2026/02/freebsd-brcmfmac/",
+      "source": "hackernews",
+      "summary": "FreeBSD doesn't have Wi-Fi driver for my old MacBook. AI build one for me",
+      "engagement_score": 0.7042,
+      "published_at": "2026-02-23T21:44:28+00:00",
+      "keywords": [],
+      "raw_data": {
+        "hn_id": 47129361,
+        "comments": 228
+      }
+    }
+  ],
+  "total_fetched": 27,
+  "timestamp": "2026-02-24T03:19:52.485802+00:00"
+}
