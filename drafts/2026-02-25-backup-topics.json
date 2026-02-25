@@ -1,0 +1,74 @@
+{
+  "date": "2026-02-25",
+  "primary": {
+    "title": "Why Pass@k Optimization Can Degrade Pass@1: Prompt Interference in LLM Post-training",
+    "url": "https://arxiv.org/abs/2602.21189v1",
+    "source": "arxiv",
+    "summary": "Pass@k is a widely used performance metric for verifiable large language model tasks, including mathematical reasoning, code generation, and short-answer reasoning. It defines success if any of $k$ independently sampled solutions passes a verifier. This multi-sample inference metric has motivated inference-aware fine-tuning methods that directly optimize pass@$k$. However, prior work reports a recurring trade-off: pass@k improves while pass@1 degrades under such methods. This trade-off is practi",
+    "engagement_score": 0.7565,
+    "published_at": "2026-02-24T18:43:08Z",
+    "keywords": [
+      "cs.LG",
+      "cs.AI"
+    ],
+    "raw_data": {}
+  },
+  "backups": [
+    {
+      "title": "On Data Engineering for Scaling LLM Terminal Capabilities",
+      "url": "https://arxiv.org/abs/2602.21193v1",
+      "source": "arxiv",
+      "summary": "Despite rapid recent progress in the terminal capabilities of large language models, the training data strategies behind state-of-the-art terminal agents remain largely undisclosed. We address this gap through a systematic study of data engineering practices for terminal agents, making two key contributions: (1) Terminal-Task-Gen, a lightweight synthetic task generation pipeline that supports seed-based and skill-based task construction, and (2) a comprehensive analysis of data and training stra",
+      "engagement_score": 0.7071,
+      "published_at": "2026-02-24T18:51:04Z",
+      "keywords": [
+        "cs.CL"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "A Benchmark for Deep Information Synthesis",
+      "url": "https://arxiv.org/abs/2602.21143v1",
+      "source": "arxiv",
+      "summary": "Large language model (LLM)-based agents are increasingly used to solve complex tasks involving tool use, such as web browsing, code execution, and data analysis. However, current evaluation benchmarks do not adequately assess their ability to solve real-world tasks that require synthesizing information from multiple sources and inferring insights beyond simple fact retrieval. To address this, we introduce DEEPSYNTH, a novel benchmark designed to evaluate agents on realistic, time-consuming probl",
+      "engagement_score": 0.7024,
+      "published_at": "2026-02-24T17:43:32Z",
+      "keywords": [
+        "cs.AI",
+        "cs.CL",
+        "cs.IR",
+        "cs.LG"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "IDF killed Gaza aid workers at point blank range in 2025 massacre: Report",
+      "url": "https://www.dropsitenews.com/p/israeli-soldiers-tel-sultan-gaza-red-crescent-civil-defense-massacre-report-forensic-architecture-earshot",
+      "source": "hackernews",
+      "summary": "IDF killed Gaza aid workers at point blank range in 2025 massacre: Report",
+      "engagement_score": 0.6647,
+      "published_at": "2026-02-24T12:16:45+00:00",
+      "keywords": [],
+      "raw_data": {
+        "hn_id": 47136179,
+        "comments": 546
+      }
+    },
+    {
+      "title": "Squint: Fast Visual Reinforcement Learning for Sim-to-Real Robotics",
+      "url": "https://arxiv.org/abs/2602.21203v1",
+      "source": "arxiv",
+      "summary": "Visual reinforcement learning is appealing for robotics but expensive -- off-policy methods are sample-efficient yet slow; on-policy methods parallelize well but waste samples. Recent work has shown that off-policy methods can train faster than on-policy methods in wall-clock time for state-based control. Extending this to vision remains challenging, where high-dimensional input images complicate training dynamics and introduce substantial storage and encoding overhead. To address these challeng",
+      "engagement_score": 0.6576,
+      "published_at": "2026-02-24T18:58:11Z",
+      "keywords": [
+        "cs.RO",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "raw_data": {}
+    }
+  ],
+  "total_fetched": 27,
+  "timestamp": "2026-02-25T03:20:55.972878+00:00"
+}
