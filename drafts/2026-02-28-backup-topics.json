@@ -1,0 +1,75 @@
+{
+  "date": "2026-02-28",
+  "primary": {
+    "title": "I am directing the Department of War to designate Anthropic a supply-chain risk",
+    "url": "https://twitter.com/secwar/status/2027507717469049070",
+    "source": "hackernews",
+    "summary": "I am directing the Department of War to designate Anthropic a supply-chain risk",
+    "engagement_score": 0.71,
+    "published_at": "2026-02-27T22:31:18+00:00",
+    "keywords": [],
+    "raw_data": {
+      "hn_id": 47186677,
+      "comments": 918
+    }
+  },
+  "backups": [
+    {
+      "title": "Toward Expert Investment Teams:A Multi-Agent LLM System with Fine-Grained Trading Tasks",
+      "url": "https://arxiv.org/abs/2602.23330v1",
+      "source": "arxiv",
+      "summary": "The advancement of large language models (LLMs) has accelerated the development of autonomous financial trading systems. While mainstream approaches deploy multi-agent systems mimicking analyst and manager roles, they often rely on abstract instructions that overlook the intricacies of real-world workflows, which can lead to degraded inference performance and less transparent decision-making. Therefore, we propose a multi-agent LLM trading framework that explicitly decomposes investment analysis",
+      "engagement_score": 0.6088,
+      "published_at": "2026-02-26T18:37:36Z",
+      "keywords": [
+        "cs.AI",
+        "q-fin.TR"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "Scale Can't Overcome Pragmatics: The Impact of Reporting Bias on Vision-Language Reasoning",
+      "url": "https://arxiv.org/abs/2602.23351v1",
+      "source": "arxiv",
+      "summary": "The lack of reasoning capabilities in Vision-Language Models (VLMs) has remained at the forefront of research discourse. We posit that this behavior stems from a reporting bias in their training data. That is, how people communicate about visual content by default omits tacit information needed to supervise some types of reasoning; e.g., \"at the game today!\" is a more likely caption than \"a photo of 37 people standing behind a field\". We investigate the data underlying the popular VLMs OpenCLIP,",
+      "engagement_score": 0.56,
+      "published_at": "2026-02-26T18:54:06Z",
+      "keywords": [
+        "cs.CL",
+        "cs.CV"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "Utilizing LLMs for Industrial Process Automation",
+      "url": "https://arxiv.org/abs/2602.23331v1",
+      "source": "arxiv",
+      "summary": "A growing number of publications address the best practices to use Large Language Models (LLMs) for software engineering in recent years. However, most of this work focuses on widely-used general purpose programming languages like Python due to their widespread usage training data. The utility of LLMs for software within the industrial process automation domain, with highly-specialized languages that are typically only used in proprietary contexts, remains underexplored. This research aims to ut",
+      "engagement_score": 0.5588,
+      "published_at": "2026-02-26T18:38:00Z",
+      "keywords": [
+        "cs.SE",
+        "cs.AI"
+      ],
+      "raw_data": {}
+    },
+    {
+      "title": "LLM Novice Uplift on Dual-Use, In Silico Biology Tasks",
+      "url": "https://arxiv.org/abs/2602.23329v1",
+      "source": "arxiv",
+      "summary": "Large language models (LLMs) perform increasingly well on biology benchmarks, but it remains unclear whether they uplift novice users -- i.e., enable humans to perform better than with internet-only resources. This uncertainty is central to understanding both scientific acceleration and dual-use risk. We conducted a multi-model, multi-benchmark human uplift study comparing novices with LLM access versus internet-only access across eight biosecurity-relevant task sets. Participants worked on comp",
+      "engagement_score": 0.5588,
+      "published_at": "2026-02-26T18:37:23Z",
+      "keywords": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CR",
+        "cs.CY",
+        "cs.HC"
+      ],
+      "raw_data": {}
+    }
+  ],
+  "total_fetched": 28,
+  "timestamp": "2026-02-28T02:42:44.520793+00:00"
+}
